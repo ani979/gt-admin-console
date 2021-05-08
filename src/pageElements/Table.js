@@ -1,14 +1,18 @@
 import { Checkbox } from "@material-ui/core";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import { useEffect, useState } from "react";
+import THeader from "../tableElements/THeader";
+import TRow from "../tableElements/TRow";
 import { PAGE_SIZE } from "../utils/Constants";
 import Footer from "./Footer";
 import "./style.css";
 
-const Table = ({ tableData, onDataChanged }) => {
+const Table = ({ tableData, onDataChanged, onDataRemoved }) => {
   const [page, setPage] = useState(0);
   const [allChecked, setAllChecked] = useState(false);
   const [isChecked, setIsChecked] = useState();
+  const [isEditMode, setEditMode] = useState();
   const [pageData, setPageData] = useState([]);
 
   // Column Search Headers
@@ -26,13 +30,22 @@ const Table = ({ tableData, onDataChanged }) => {
       id: "Actions",
     },
   ];
+
   useEffect(() => {
     const offset = page * PAGE_SIZE;
     setPageData(tableData.slice(offset, offset + PAGE_SIZE));
   }, [page, tableData]);
 
   useEffect(() => {
-    setPage(0);
+    if (pageData.length === 0) {
+      if (page > 1) {
+        setPage(page - 1);
+      } else {
+        setPage(page);
+      }
+    } else {
+      setPage(page);
+    }
   }, [tableData]);
 
   useEffect(() => {
@@ -41,6 +54,7 @@ const Table = ({ tableData, onDataChanged }) => {
       return acc;
     }, {});
     setIsChecked(initialIsChecked);
+    setEditMode(initialIsChecked);
   }, [tableData]);
 
   const handleAllCheck = (e) => {
@@ -53,7 +67,7 @@ const Table = ({ tableData, onDataChanged }) => {
   };
 
   const onDeleteFromRowAction = (e) => {
-    onDataChanged([e.target.id]);
+    onDataRemoved([e.target.id]);
   };
 
   const onDeleteSelected = () => {
@@ -62,11 +76,18 @@ const Table = ({ tableData, onDataChanged }) => {
         return key;
       }
     });
-    onDataChanged(itemList);
+    onDataRemoved(itemList);
     setAllChecked(false);
   };
   const handleSingleCheck = (e) => {
     setIsChecked({ ...isChecked, [e.target.id]: e.target.checked });
+  };
+  const handleEditMode = (e) => {
+    const allFalse = tableData.reduce((acc, d) => {
+        acc[d.id] = false;
+        return acc;
+      }, {});
+    setEditMode({ ...allFalse, [e.target.id]: true });
   };
 
   const displayCheckBox = (entry) => {
@@ -88,30 +109,45 @@ const Table = ({ tableData, onDataChanged }) => {
         id={entry.id}
         onClick={onDeleteFromRowAction}
         style={{ cursor: "pointer" }}
+      /> &nbsp;&nbsp;
+      <EditOutlinedIcon
+        id={entry.id}
+        onClick={handleEditMode}
+        style={{ cursor: "pointer" }}
       />
     </td>
   );
 
-  const renderARow = (row) =>
-    columnHeaders.map((column) =>
-      column.id === "Actions" ? (
-        renderActionColumn(row)
-      ) : (
-        <td>{row[column.id.toLowerCase()]}</td>
-      )
+  function renderRowData(row, column, onDataChanged, isRowInEditMode) {
+    return (
+      <TRow
+        row={row}
+        column={column}
+        onDataChanged={onDataChanged}
+        isRowInEditMode={isRowInEditMode}
+      ></TRow>
     );
+  }
+
+  const renderARow = (row) => {
+    const isRowInEditMode = isEditMode[row.id];
+
+    return columnHeaders.map((column) =>
+      column.id === "Actions"
+        ? renderActionColumn(row)
+        : renderRowData(row, column, onDataChanged, isRowInEditMode)
+    );
+  };
 
   const renderRows = pageData.map((entry) => {
-    const className = isChecked && isChecked[entry.id] ? "highlighted-row":"";
-    return (<tr key={entry.id} className = {className}>
-      {displayCheckBox(entry)}
-      {renderARow(entry)}
-    </tr>);
+    const className = isChecked && isChecked[entry.id] ? "highlighted-row" : "";
+    return (
+      <tr key={entry.id + isEditMode[entry.id]} className={className}>
+        {displayCheckBox(entry)}
+        {renderARow(entry)}
+      </tr>
+    );
   });
-
-  const renderTableHeader = columnHeaders.map((header) => (
-    <th key={header.id}>{header.id}</th>
-  ));
 
   return (
     <>
@@ -126,7 +162,7 @@ const Table = ({ tableData, onDataChanged }) => {
                 onChange={handleAllCheck}
               />
             </th>
-            {renderTableHeader}
+            <THeader columnHeaders={columnHeaders} />
           </tr>
         </thead>
         <tbody>{renderRows}</tbody>

@@ -6,6 +6,7 @@ import { getUsers } from "../utils/APIs";
 const AdminPage = () => {
   // For page and search
   const [searchParam, setSearchParameters] = useState("");
+  const [firstPage, setFirstPage] = useState(0);
   const [initialData, setInitialData] = useState([]);
   const [currentlyViewedData, setCurrentlyViewedData] = useState([]);
 
@@ -31,29 +32,47 @@ const AdminPage = () => {
           initialData.filter((data) => {
             return isEntryPresent(data);
           })
-        )
+        ) 
       : setCurrentlyViewedData(initialData);
+    setFirstPage(0);
   }, [searchParam, initialData]);
 
-  const onDataChanged = (toBeDeletedData) => {
+  const onDataRemoved = (toBeDeletedData) => {
     const remainingViewedData = currentlyViewedData.filter(
       (item) => !toBeDeletedData.includes(item.id)
     );
     const remainingCompleteData = initialData.filter(
       (item) => !toBeDeletedData.includes(item.id)
     );
+    if(remainingViewedData.length === 0) {
+        setCurrentlyViewedData(remainingCompleteData);
+        setSearchParameters("");
+    } else {
+        setCurrentlyViewedData(remainingViewedData);
+    }
     setInitialData(remainingCompleteData);
-    setCurrentlyViewedData(remainingViewedData);
+    
+  };
+
+  const onDataChanged = (toBeEditedRow) => {
+    const editedTableData = currentlyViewedData.map((data) => {
+      if (data.id === toBeEditedRow.id) {
+        return toBeEditedRow;
+      }
+      return data;
+    });
+    setCurrentlyViewedData(editedTableData);
   };
 
   return (
     <div>
       <div>
-        <SearchBar setSearchParam={setSearchParameters} />
-        <Table
+        <SearchBar key={"SearchBar"+initialData.length} doSearch={setSearchParameters} />
+        <Table key = {"Table" + currentlyViewedData.length}
           initialData={initialData}
           tableData={currentlyViewedData}
           onDataChanged={onDataChanged}
+          onDataRemoved={onDataRemoved}
         ></Table>
       </div>
     </div>
