@@ -1,7 +1,7 @@
 import { PAGE_SIZE } from "../utils/Constants";
 
-const Pagination = ({ currentPage, allPages, setPage }) => {
-  const numberOfPages = Math.ceil(allPages / PAGE_SIZE);
+const Pagination = ({ currentPage, dataSize, setPage }) => {
+  const numberOfPages = Math.ceil(dataSize / PAGE_SIZE);
 
   const getPageNumbers = () => {
     const pages = [];
@@ -11,20 +11,6 @@ const Pagination = ({ currentPage, allPages, setPage }) => {
     return pages;
   };
 
-  const renderAllPageNumbers = () => {
-    return getPageNumbers().map((onePage) => (
-      <li className="page-item">
-        <button
-          class="btn btn-primary"
-          style={{ borderRadius: "50%" }}
-          key={onePage}
-          onClick={() => setPage(onePage)}
-        >
-          {onePage + 1}
-        </button>
-      </li>
-    ));
-  };
   const goToPrevPage = () => {
     if (currentPage > 0) {
       setPage(currentPage - 1);
@@ -37,19 +23,49 @@ const Pagination = ({ currentPage, allPages, setPage }) => {
     }
   };
 
+  const renderAllPageNumbers = () => {
+    return getPageNumbers().map((onePage) => {
+      let highlightedItemStyle = { borderRadius: "50%" };
+      if (currentPage === onePage) {
+        highlightedItemStyle = {
+          borderRadius: "50%",
+          backgroundColor: "white",
+          color: "black",
+        };
+      }
+
+      return (
+        <li className="page-item">
+          <button
+            className="btn btn-primary"
+            style={highlightedItemStyle}
+            key={onePage}
+            onClick={() => setPage(onePage)}
+          >
+            {onePage + 1}
+          </button>
+        </li>
+      );
+    });
+  };
+
   const renderPrevPageNumbers = () => {
     return (
       <>
-        <li class="page-item">
-          <button key="first-page" class="page-link" onClick={() => setPage(0)}>
+        <li className="page-item">
+          <button
+            key="first-page"
+            className="page-link"
+            onClick={() => setPage(0)}
+          >
             <span aria-hidden="true">&#171;</span>
-            <span class="sr-only"> First</span>
+            <span className="sr-only"> First</span>
           </button>
         </li>
-        <li class="page-item">
-          <button key="prev-page" class="page-link" onClick={goToPrevPage}>
+        <li className="page-item">
+          <button key="prev-page" className="page-link" onClick={goToPrevPage}>
             <span aria-hidden="true">&#8592;</span>
-            <span class="sr-only"> Previous</span>
+            <span className="sr-only"> Previous</span>
           </button>
         </li>
       </>
@@ -59,20 +75,20 @@ const Pagination = ({ currentPage, allPages, setPage }) => {
   const renderNextPageNumbers = () => {
     return (
       <>
-        <li class="page-item">
-          <button key="next-page" class="page-link" onClick={goToNextPage}>
+        <li className="page-item">
+          <button key="next-page" className="page-link" onClick={goToNextPage}>
             <span aria-hidden="true">&rarr;</span>
-            <span class="sr-only"> Next </span>
+            <span className="sr-only"> Next </span>
           </button>
         </li>
-        <li class="page-item">
+        <li className="page-item">
           <button
             key="last-page"
-            class="page-link"
+            className="page-link"
             onClick={() => setPage(numberOfPages - 1)}
           >
             <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only"> Last</span>
+            <span className="sr-only"> Last</span>
           </button>
         </li>
       </>
@@ -80,7 +96,7 @@ const Pagination = ({ currentPage, allPages, setPage }) => {
   };
   return (
     <nav className="flex-grow-1">
-      <ul class="pagination justify-content-around">
+      <ul className="pagination justify-content-around">
         {renderPrevPageNumbers()}
         {renderAllPageNumbers()}
         {renderNextPageNumbers()}

@@ -1,19 +1,19 @@
 import Pagination from "./Pagination";
-import "./footer-style.css";
+import "./style.css";
 
-const Footer = ({ currentPage, allPages, setPage, remove }) => {
+const Footer = ({ currentPage, dataSize, setPage, removeSelected }) => {
   return (
     <div className="flex-container">
       <button
         className="col-md-2 btn btn-danger button-border-rounded"
-        onClick={remove}
+        onClick={removeSelected}
       >
         Delete Selected
       </button>
       <div className="col-md-2"></div>
       <Pagination
         currentPage={currentPage}
-        allPages={allPages}
+        dataSize={dataSize}
         setPage={setPage}
       />
     </div>
