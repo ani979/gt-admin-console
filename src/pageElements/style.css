@@ -22,3 +22,7 @@
 .highlighted-row {
   background-color: lightgray;
 }
+
+.padding-2 {
+  padding: 2px !important;
+}

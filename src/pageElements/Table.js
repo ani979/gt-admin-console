@@ -92,7 +92,7 @@ const Table = ({ tableData, onDataChanged, onDataRemoved }) => {
 
   const displayCheckBox = (entry) => {
     return (
-      <td>
+      <td className = "padding-2">
         <Checkbox
           id={entry.id}
           checked={isChecked ? isChecked[entry.id] : false}
@@ -157,7 +157,7 @@ const Table = ({ tableData, onDataChanged, onDataRemoved }) => {
       <table className="table text-left">
         <thead>
           <tr>
-            <th>
+            <th className="padding-2">
               <Checkbox
                 name="checkall"
                 type="checkbox"
