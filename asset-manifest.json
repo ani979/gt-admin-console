@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/gt-admin-console/static/css/main.c0c7ab11.chunk.css",
-    "main.js": "/gt-admin-console/static/js/main.f7633ad1.chunk.js",
-    "main.js.map": "/gt-admin-console/static/js/main.f7633ad1.chunk.js.map",
+    "main.css": "/gt-admin-console/static/css/main.bd675c4b.chunk.css",
+    "main.js": "/gt-admin-console/static/js/main.709dec9f.chunk.js",
+    "main.js.map": "/gt-admin-console/static/js/main.709dec9f.chunk.js.map",
     "runtime-main.js": "/gt-admin-console/static/js/runtime-main.0f25f92b.js",
     "runtime-main.js.map": "/gt-admin-console/static/js/runtime-main.0f25f92b.js.map",
     "static/js/2.717f0348.chunk.js": "/gt-admin-console/static/js/2.717f0348.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.a5ef1e34.chunk.js": "/gt-admin-console/static/js/3.a5ef1e34.chunk.js",
     "static/js/3.a5ef1e34.chunk.js.map": "/gt-admin-console/static/js/3.a5ef1e34.chunk.js.map",
     "index.html": "/gt-admin-console/index.html",
-    "static/css/main.c0c7ab11.chunk.css.map": "/gt-admin-console/static/css/main.c0c7ab11.chunk.css.map",
+    "static/css/main.bd675c4b.chunk.css.map": "/gt-admin-console/static/css/main.bd675c4b.chunk.css.map",
     "static/js/2.717f0348.chunk.js.LICENSE.txt": "/gt-admin-console/static/js/2.717f0348.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.0f25f92b.js",
     "static/js/2.717f0348.chunk.js",
-    "static/css/main.c0c7ab11.chunk.css",
-    "static/js/main.f7633ad1.chunk.js"
+    "static/css/main.bd675c4b.chunk.css",
+    "static/js/main.709dec9f.chunk.js"
   ]
 }
