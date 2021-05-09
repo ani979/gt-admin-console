@@ -59,13 +59,13 @@ const Pagination = ({ currentPage, dataSize, setPage }) => {
             onClick={() => setPage(0)}
           >
             <span aria-hidden="true">&#171;</span>
-            <span className="sr-only"> First</span>
+            <span className="sr-only">First</span>
           </button>
         </li>
         <li className="page-item">
           <button key="prev-page" className="page-link" onClick={goToPrevPage}>
             <span aria-hidden="true">&#8592;</span>
-            <span className="sr-only"> Previous</span>
+            <span className="sr-only">Previous</span>
           </button>
         </li>
       </>
@@ -78,7 +78,7 @@ const Pagination = ({ currentPage, dataSize, setPage }) => {
         <li className="page-item">
           <button key="next-page" className="page-link" onClick={goToNextPage}>
             <span aria-hidden="true">&rarr;</span>
-            <span className="sr-only"> Next </span>
+            <span className="sr-only">Next</span>
           </button>
         </li>
         <li className="page-item">
@@ -88,7 +88,7 @@ const Pagination = ({ currentPage, dataSize, setPage }) => {
             onClick={() => setPage(numberOfPages - 1)}
           >
             <span aria-hidden="true">&raquo;</span>
-            <span className="sr-only"> Last</span>
+            <span className="sr-only">Last</span>
           </button>
         </li>
       </>

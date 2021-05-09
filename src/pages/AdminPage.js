@@ -32,7 +32,7 @@ const AdminPage = () => {
           initialData.filter((data) => {
             return isEntryPresent(data);
           })
-        ) 
+        )
       : setCurrentlyViewedData(initialData);
     setFirstPage(0);
   }, [searchParam, initialData]);
@@ -44,14 +44,13 @@ const AdminPage = () => {
     const remainingCompleteData = initialData.filter(
       (item) => !toBeDeletedData.includes(item.id)
     );
-    if(remainingViewedData.length === 0) {
-        setCurrentlyViewedData(remainingCompleteData);
-        setSearchParameters("");
+    if (remainingViewedData.length === 0) {
+      setCurrentlyViewedData(remainingCompleteData);
+      setSearchParameters("");
     } else {
-        setCurrentlyViewedData(remainingViewedData);
+      setCurrentlyViewedData(remainingViewedData);
     }
     setInitialData(remainingCompleteData);
-    
   };
 
   const onDataChanged = (toBeEditedRow) => {
@@ -67,8 +66,12 @@ const AdminPage = () => {
   return (
     <div>
       <div>
-        <SearchBar key={"SearchBar"+initialData.length} doSearch={setSearchParameters} />
-        <Table key = {"Table" + currentlyViewedData.length}
+        <SearchBar
+          key={"SearchBar" + initialData.length}
+          doSearch={setSearchParameters}
+        />
+        <Table
+          key={"Table" + currentlyViewedData.length}
           initialData={initialData}
           tableData={currentlyViewedData}
           onDataChanged={onDataChanged}

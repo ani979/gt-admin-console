@@ -1,6 +1,6 @@
 import { Checkbox } from "@material-ui/core";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { useEffect, useState } from "react";
 import THeader from "../tableElements/THeader";
 import TRow from "../tableElements/TRow";
@@ -84,9 +84,9 @@ const Table = ({ tableData, onDataChanged, onDataRemoved }) => {
   };
   const handleEditMode = (e) => {
     const allFalse = tableData.reduce((acc, d) => {
-        acc[d.id] = false;
-        return acc;
-      }, {});
+      acc[d.id] = false;
+      return acc;
+    }, {});
     setEditMode({ ...allFalse, [e.target.id]: true });
   };
 
@@ -106,11 +106,14 @@ const Table = ({ tableData, onDataChanged, onDataRemoved }) => {
   const renderActionColumn = (entry) => (
     <td>
       <DeleteOutlineIcon
+        title="delete"
         id={entry.id}
         onClick={onDeleteFromRowAction}
         style={{ cursor: "pointer" }}
-      /> &nbsp;&nbsp;
+      />{" "}
+      &nbsp;&nbsp;
       <EditOutlinedIcon
+        title="edit"
         id={entry.id}
         onClick={handleEditMode}
         style={{ cursor: "pointer" }}
