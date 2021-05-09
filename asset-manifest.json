@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/gt-admin-console/static/css/main.c0c7ab11.chunk.css",
-    "main.js": "/gt-admin-console/static/js/main.33be635e.chunk.js",
-    "main.js.map": "/gt-admin-console/static/js/main.33be635e.chunk.js.map",
+    "main.js": "/gt-admin-console/static/js/main.f7633ad1.chunk.js",
+    "main.js.map": "/gt-admin-console/static/js/main.f7633ad1.chunk.js.map",
     "runtime-main.js": "/gt-admin-console/static/js/runtime-main.0f25f92b.js",
     "runtime-main.js.map": "/gt-admin-console/static/js/runtime-main.0f25f92b.js.map",
     "static/js/2.717f0348.chunk.js": "/gt-admin-console/static/js/2.717f0348.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.0f25f92b.js",
     "static/js/2.717f0348.chunk.js",
     "static/css/main.c0c7ab11.chunk.css",
-    "static/js/main.33be635e.chunk.js"
+    "static/js/main.f7633ad1.chunk.js"
   ]
 }
